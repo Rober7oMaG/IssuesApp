@@ -15,15 +15,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
-    /* Aliases */
-    "baseUrl": ".",
-    "paths": {
-      /* Application Root */
-      "@*": ["src/*"],
-      /* Root alias */
-      "/*": ["./*"]
-    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
   "exclude": ["node_modules", "dist"],

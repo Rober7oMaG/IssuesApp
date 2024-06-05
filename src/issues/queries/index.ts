@@ -1,0 +1,1 @@
+export { getLabelsQuery } from './labels';
