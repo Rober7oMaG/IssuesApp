@@ -1,5 +1,11 @@
-# React Query - Issues
+<p align="center">
+  <a href="http://react.dev/" target="blank"><img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" width="200" height="200" alt="React Logo" /></a>
+  <a href="http://react.dev/" target="blank"><img src="https://miro.medium.com/v2/resize:fit:1400/1*elhu-42TzQEdsFjKDbQhhA.png" width="200" height="200" alt="React Logo" /></a>
+</p>
 
-1. Clonar repositorio
-2. Ejecutar ``` yarn install``` o ```npm install```
-3. Abrir el URL del proyecto
+# IssuesApp
+
+## Run on development
+1. Clone this repository.
+2. Run `npm install` or `yarn install` in the project root directory to install all dependencies.
+3. Run `npm run dev` or `yarn dev` to start the development server.
