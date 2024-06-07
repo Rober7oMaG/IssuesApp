@@ -8,4 +8,5 @@
 ## Run on development
 1. Clone this repository.
 2. Run `npm install` or `yarn install` in the project root directory to install all dependencies.
-3. Run `npm run dev` or `yarn dev` to start the development server.
+3. Go to https://github.com/settings/tokens?type=beta and generate a new token with the `Interaction limits` on read-only access for public repositories.
+4. Run `npm run dev` or `yarn dev` to start the development server.

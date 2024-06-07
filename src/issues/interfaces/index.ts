@@ -1,1 +1,2 @@
-export * from './label';
+export type { Label } from './label';
+export { type Issue, State } from './issue';

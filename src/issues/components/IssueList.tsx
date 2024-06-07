@@ -1,6 +1,11 @@
+import { Issue } from '../interfaces';
 import { IssueItem } from './IssueItem';
 
-export const IssueList = () => {
+type IssueListProps = {
+    issues: Issue[];
+}
+
+export const IssueList = ({ issues }: IssueListProps) => {
     return (
         <div className="card border-white">
             <div className="card-header bg-dark">
@@ -18,10 +23,9 @@ export const IssueList = () => {
             </div>
             <div className="card-body text-dark">
                 {
-                    [1,2,3].map( issue => (
-                        <IssueItem key={issue} />
+                    issues.map( issue => (
+                        <IssueItem key={issue.id} issue={issue} />
                     ))
-                
                 }                
             </div>
         </div>

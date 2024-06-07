@@ -3,7 +3,12 @@ import { githubApi } from "../../api";
 import { Label } from "../interfaces";
 
 const getLabels = async () => {
-  const { data } = await githubApi.get<Label[]>('/labels');
+  const { data } = await githubApi.get<Label[]>('/labels', {
+    headers: {
+      Authorization: null,
+    }
+  });
+
   return data;
 };
 
