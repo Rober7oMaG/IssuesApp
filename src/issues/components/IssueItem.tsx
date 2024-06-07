@@ -1,30 +1,37 @@
 import { FiInfo, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import { Issue, State } from '../interfaces';
 
 type IssueItemProps = {
-    issue: Issue;
+   issue: Issue;
 }
 
 export const IssueItem = ({ issue }: IssueItemProps) => {
-    return (
-        <div className="card mb-2 issue">
-            <div className="card-body d-flex align-items-center">
-                
-                {
-                    issue.state === State.Open ? <FiInfo size={30} color="red" /> : <FiCheckCircle size={30} color="green" />
-                }
+   const navigate = useNavigate();
 
-                <div className="d-flex flex-column flex-fill px-2">
-                    <span>{issue.title}</span>
-                    <span className="issue-subinfo">#{issue.number} opened 2 days ago by <span className='fw-bold'>{issue.user.login}</span></span>
-                </div>
+   const { number, state, title, user, comments } = issue;
 
-                <div className='d-flex align-items-center'>
-                    <img src={issue.user.avatar_url} alt="User Avatar" className="avatar" />
-                    <span className='px-2'>{issue.comments}</span>
-                    <FiMessageSquare />
-                </div>
+   return (
+      <div
+         className="card mb-2 issue"
+         onClick={() => navigate(`/issues/issue/${number}`)}
+      >
+         <div className="card-body d-flex align-items-center">
+            {
+               state === State.Open ? <FiInfo size={30} color="red" /> : <FiCheckCircle size={30} color="green" />
+            }
+
+            <div className="d-flex flex-column flex-fill px-2">
+               <span>{title}</span>
+               <span className="issue-subinfo">#{number} opened 2 days ago by <span className='fw-bold'>{user.login}</span></span>
             </div>
-        </div>
-    );
+
+            <div className='d-flex align-items-center'>
+               <img src={user.avatar_url} alt="User Avatar" className="avatar" />
+               <span className='px-2'>{comments}</span>
+               <FiMessageSquare />
+            </div>
+         </div>
+      </div>
+   );
 };
