@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import { ListView, IssueView } from '@issues/views';
+import { ListView, IssueView } from '@views';
 
 import { App } from '../App';
 

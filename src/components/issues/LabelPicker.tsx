@@ -1,5 +1,5 @@
-import { LoadingIcon } from '@common/components';
-import { useLabelsQuery } from '@issues/queries';
+import { LoadingIcon } from '@components/common';
+import { useLabelsQuery } from '@queries';
 
 interface LabelPickerProps {
   selectedLabels: string[];

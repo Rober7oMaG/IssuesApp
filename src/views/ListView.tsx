@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { LoadingIcon } from '@common/components';
-import { IssueList } from '@issues/components/IssueList';
-import { LabelPicker } from '@issues/components/LabelPicker';
-import { State } from '@issues/interfaces';
-import { useIssuesQuery } from '@issues/queries';
+import { LoadingIcon } from '@components/common';
+import { IssueList } from '@components/issues/IssueList';
+import { LabelPicker } from '@components/issues/LabelPicker';
+import { State } from '@interfaces';
+import { useIssuesQuery } from '@queries';
 
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);

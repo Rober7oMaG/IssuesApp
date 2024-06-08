@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 
-import { Issue } from '@issues/interfaces';
+import { Issue } from '@interfaces';
 
 interface IssueCommentProps {
   issue: Issue;

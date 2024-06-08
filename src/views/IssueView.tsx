@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { LoadingIcon } from '@common/components';
-import { IssueComment } from '@issues/components/IssueComment';
-import { useIssueByNumberQuery, useIssueCommentsQuery } from '@issues/queries';
+import { LoadingIcon } from '@components/common';
+import { IssueComment } from '@components/issues/IssueComment';
+import { useIssueByNumberQuery, useIssueCommentsQuery } from '@queries';
 
 export const IssueView = () => {
   const params = useParams();

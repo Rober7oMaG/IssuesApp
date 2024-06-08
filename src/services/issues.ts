@@ -1,6 +1,6 @@
 import { githubApi } from '@api';
 import { delay } from '@helpers';
-import { State, Issue } from '@issues/interfaces';
+import { State, Issue } from '@interfaces';
 
 export const getIssues = async (labels: string[] = [], state?: State) => {
   await delay(2);

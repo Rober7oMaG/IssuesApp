@@ -3,7 +3,7 @@ import { FiInfo, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 import { getTimeSince } from '@helpers';
-import { Issue, State } from '@issues/interfaces';
+import { Issue, State } from '@interfaces';
 // import { getIssueByNumber, getIssueComments } from '@issues/services';
 
 type IssueItemProps = {

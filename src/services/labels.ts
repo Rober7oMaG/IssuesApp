@@ -1,4 +1,4 @@
-import { githubApi } from '../../api';
+import { githubApi } from '../api';
 import { Label } from '../interfaces';
 
 export const getLabels = async () => {

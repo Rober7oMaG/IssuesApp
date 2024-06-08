@@ -1,4 +1,4 @@
-import { Issue, State } from '@issues/interfaces';
+import { Issue, State } from '@interfaces';
 
 import { IssueItem } from './IssueItem';
 

@@ -1,11 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { State } from '@issues/interfaces';
-import {
-  getIssueByNumber,
-  getIssueComments,
-  getIssues,
-} from '@issues/services';
+import { State } from '@interfaces';
+import { getIssueByNumber, getIssueComments, getIssues } from '@services';
 
 type useIssuesQueryProps = {
   state?: State;
