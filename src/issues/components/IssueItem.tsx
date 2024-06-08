@@ -1,7 +1,9 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { FiInfo, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 import { Issue, State } from '@issues/interfaces';
+// import { getIssueByNumber, getIssueComments } from '@issues/services';
 
 type IssueItemProps = {
   issue: Issue;
@@ -9,13 +11,40 @@ type IssueItemProps = {
 
 export const IssueItem = ({ issue }: IssueItemProps) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { number, state, title, user, comments } = issue;
+
+  // const prefetchData = () => {
+  //   queryClient.prefetchQuery({
+  //     queryKey: ['issue', number],
+  //     queryFn: () => getIssueByNumber(number),
+  //     staleTime: 1000 * 30, // 30 seconds
+  //   });
+
+  //   queryClient.prefetchQuery({
+  //     queryKey: ['issue', number, 'comments'],
+  //     queryFn: () => getIssueComments(number),
+  //     staleTime: 1000 * 30, // 30 seconds
+  //   });
+  // };
+
+  const presetData = () => {
+    queryClient.setQueryData(['issue', number], issue, {
+      updatedAt: new Date().getTime() + 180000,
+    });
+
+    queryClient.setQueryData(['issue', number, 'comments'], comments, {
+      updatedAt: new Date().getTime() + 180000,
+    });
+  };
 
   return (
     <div
       className="card mb-2 issue"
       onClick={() => navigate(`/issues/issue/${number}`)}
+      // onMouseEnter={prefetchData}
+      onMouseEnter={presetData}
     >
       <div className="card-body d-flex align-items-center">
         {state === State.Open ? (
