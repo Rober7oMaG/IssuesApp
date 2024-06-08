@@ -1,11 +1,12 @@
-import { useQuery } from "@tanstack/react-query"; 
-import { getLabels } from "../services";
+import { useQuery } from '@tanstack/react-query';
 
-export const getLabelsQuery = () => {
+import { getLabels } from '@issues/services';
+
+export const useLabelsQuery = () => {
   return useQuery({
     queryKey: ['labels'],
     queryFn: getLabels,
     staleTime: 1000 * 60 * 60, // 1 hour
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   });
 };

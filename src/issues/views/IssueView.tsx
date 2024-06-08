@@ -1,7 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { IssueComment } from '../components/IssueComment';
-import { getIssueByNumberQuery, getIssueCommentsQuery } from '../queries';
-import { LoadingIcon } from '../../common/components';
+
+import { LoadingIcon } from '@common/components';
+import { IssueComment } from '@issues/components/IssueComment';
+import { useIssueByNumberQuery, useIssueCommentsQuery } from '@issues/queries';
 
 export const IssueView = () => {
   const params = useParams();
@@ -9,8 +10,9 @@ export const IssueView = () => {
 
   const { id = '0' } = params;
 
-  const { data: query, isLoading: isQueryLoading } = getIssueByNumberQuery(+id);
-  const { data: comments, isLoading: isCommentsLoading } = getIssueCommentsQuery(+id);
+  const { data: query, isLoading: isQueryLoading } = useIssueByNumberQuery(+id);
+  const { data: comments, isLoading: isCommentsLoading } =
+    useIssueCommentsQuery(+id);
 
   if (isQueryLoading) return <LoadingIcon />;
 
@@ -19,18 +21,18 @@ export const IssueView = () => {
   return (
     <div className="row mb-5">
       <div className="col-12 mb-3">
-        <Link to='./issues/list'>Go Back</Link>
+        <Link to="./issues/list">Go Back</Link>
       </div>
 
       {/* First comment */}
       <IssueComment issue={query} />
-      
+
       {/* Other comments */}
-      {
-        isCommentsLoading ? <LoadingIcon /> : comments?.map((issue) => (
-          <IssueComment key={issue.id} issue={issue} />
-        ))
-      }
+      {isCommentsLoading ? (
+        <LoadingIcon />
+      ) : (
+        comments?.map((issue) => <IssueComment key={issue.id} issue={issue} />)
+      )}
     </div>
   );
 };

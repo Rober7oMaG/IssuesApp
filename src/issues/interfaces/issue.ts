@@ -1,4 +1,4 @@
-import { Label } from "./label";
+import { Label } from './label';
 
 export interface Issue {
   url: string;
@@ -16,7 +16,7 @@ export interface Issue {
   state: State;
   locked: boolean;
   assignee: null;
-  assignees: any[];
+  assignees: unknown[];
   milestone: null;
   comments: number;
   created_at: Date;
@@ -34,10 +34,10 @@ export interface Issue {
 }
 
 export enum AuthorAssociation {
-  Collaborator = "COLLABORATOR",
-  Contributor = "CONTRIBUTOR",
-  Member = "MEMBER",
-  None = "NONE",
+  Collaborator = 'COLLABORATOR',
+  Contributor = 'CONTRIBUTOR',
+  Member = 'MEMBER',
+  None = 'NONE',
 }
 
 export interface PullRequest {
@@ -51,8 +51,8 @@ export interface PullRequest {
 export interface Reactions {
   url: string;
   total_count: number;
-  "+1": number;
-  "-1": number;
+  '+1': number;
+  '-1': number;
   laugh: number;
   hooray: number;
   confused: number;
@@ -62,8 +62,8 @@ export interface Reactions {
 }
 
 export enum State {
-  Open = "open",
-  Closed = "closed",
+  Open = 'open',
+  Closed = 'closed',
 }
 
 export interface User {
@@ -88,5 +88,5 @@ export interface User {
 }
 
 export enum Type {
-  User = "User",
+  User = 'User',
 }

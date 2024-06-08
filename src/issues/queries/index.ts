@@ -1,6 +1,6 @@
-export { getLabelsQuery } from './labels';
+export { useLabelsQuery } from './labels';
 export {
-  getIssuesQuery, 
-  getIssueByNumberQuery, 
-  getIssueCommentsQuery
+  useIssuesQuery,
+  useIssueByNumberQuery,
+  useIssueCommentsQuery,
 } from './issues';

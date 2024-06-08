@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-import { IssueList } from '../components/IssueList';
-import { LabelPicker } from '../components/LabelPicker';
-import { getIssuesQuery } from '../queries';
-import { LoadingIcon } from '../../common/components';
+import { LoadingIcon } from '@common/components';
+import { IssueList } from '@issues/components/IssueList';
+import { LabelPicker } from '@issues/components/LabelPicker';
+import { useIssuesQuery } from '@issues/queries';
 
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
 
-  const { data, isLoading } = getIssuesQuery();
+  const { data, isLoading } = useIssuesQuery();
 
   const onLabelSelected = (labelName: string) => {
     selectedLabels.includes(labelName)
@@ -18,13 +18,10 @@ export const ListView = () => {
 
   return (
     <div className="row mt-5">
-      
       <div className="col-8">
-        {
-          isLoading ? <LoadingIcon /> : <IssueList issues={data || []} />
-        }
+        {isLoading ? <LoadingIcon /> : <IssueList issues={data || []} />}
       </div>
-      
+
       <div className="col-4">
         <LabelPicker
           selectedLabels={selectedLabels}

@@ -1,6 +1,6 @@
-import { githubApi } from "../../api";
-import { delay } from "../../helpers";
-import { Issue } from "../interfaces";
+import { githubApi } from '../../api';
+import { delay } from '../../helpers';
+import { Issue } from '../interfaces';
 
 export const getIssues = async () => {
   const { data } = await githubApi.get<Issue[]>('/issues');
@@ -12,11 +12,13 @@ export const getIssueByNumber = async (issueNumber: number) => {
 
   const { data } = await githubApi.get<Issue>(`/issues/${issueNumber}`);
   return data;
-}
+};
 
 export const getIssueComments = async (issueNumber: number) => {
   delay(2);
 
-  const { data } = await githubApi.get<Issue[]>(`/issues/${issueNumber}/comments`);
+  const { data } = await githubApi.get<Issue[]>(
+    `/issues/${issueNumber}/comments`,
+  );
   return data;
-}
+};
