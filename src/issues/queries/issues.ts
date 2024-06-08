@@ -1,16 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { State } from '@issues/interfaces';
 import {
   getIssueByNumber,
   getIssueComments,
   getIssues,
 } from '@issues/services';
 
-export const useIssuesQuery = () => {
+type useIssuesQueryProps = {
+  state?: State;
+  labels?: string[];
+};
+
+export const useIssuesQuery = ({ state, labels }: useIssuesQueryProps) => {
   return useQuery({
-    queryKey: ['issues'],
-    queryFn: getIssues,
-    staleTime: 1000 * 60 * 60, // 1 hour
+    queryKey: ['issues', { state, labels }],
+    queryFn: () => getIssues(labels, state),
+    staleTime: 1000 * 60 * 15, // 15 minutes
     refetchOnWindowFocus: false,
   });
 };
@@ -19,7 +25,6 @@ export const useIssueByNumberQuery = (issueNumber: number) => {
   return useQuery({
     queryKey: ['issue', issueNumber],
     queryFn: () => getIssueByNumber(issueNumber),
-    staleTime: 1000 * 60 * 60, // 1 hour
     refetchOnWindowFocus: false,
   });
 };
@@ -30,7 +35,6 @@ export const useIssueCommentsQuery = (issueNumber: number) => {
   return useQuery({
     queryKey: ['issue', issueNumber, 'comments'],
     queryFn: () => getIssueComments(data!.number),
-    staleTime: 1000 * 60 * 60, // 1 hour
     refetchOnWindowFocus: false,
     enabled: !!data,
   });

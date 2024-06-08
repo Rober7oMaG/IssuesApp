@@ -13,7 +13,7 @@ export const IssueItem = ({ issue }: IssueItemProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { number, state, title, user, comments } = issue;
+  const { number, state, title, user, comments, labels } = issue;
 
   // const prefetchData = () => {
   //   queryClient.prefetchQuery({
@@ -59,6 +59,18 @@ export const IssueItem = ({ issue }: IssueItemProps) => {
             #{number} opened 2 days ago by{' '}
             <span className="fw-bold">{user.login}</span>
           </span>
+
+          <div>
+            {labels.map((label) => (
+              <span
+                key={label.id}
+                className="badge rounded-pill m-1"
+                style={{ backgroundColor: `#${label.color}`, color: 'black' }}
+              >
+                {label.name}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="d-flex align-items-center">

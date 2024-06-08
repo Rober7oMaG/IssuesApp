@@ -1,21 +1,31 @@
-import { githubApi } from '../../api';
-import { delay } from '../../helpers';
-import { Issue } from '../interfaces';
+import { githubApi } from '@api';
+import { delay } from '@helpers';
+import { State, Issue } from '@issues/interfaces';
 
-export const getIssues = async () => {
-  const { data } = await githubApi.get<Issue[]>('/issues');
+export const getIssues = async (labels: string[] = [], state?: State) => {
+  await delay(2);
+
+  const params = new URLSearchParams();
+
+  if (state) params.append('state', state);
+  if (labels.length) params.append('labels', labels.join(','));
+
+  params.append('page', '1');
+  params.append('per_page', '5');
+
+  const { data } = await githubApi.get<Issue[]>('/issues', { params });
   return data;
 };
 
 export const getIssueByNumber = async (issueNumber: number) => {
-  delay(2);
+  await delay(2);
 
   const { data } = await githubApi.get<Issue>(`/issues/${issueNumber}`);
   return data;
 };
 
 export const getIssueComments = async (issueNumber: number) => {
-  delay(2);
+  await delay(2);
 
   const { data } = await githubApi.get<Issue[]>(
     `/issues/${issueNumber}/comments`,
