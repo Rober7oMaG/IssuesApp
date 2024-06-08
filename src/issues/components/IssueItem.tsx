@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { FiInfo, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
+import { getTimeSince } from '@helpers';
 import { Issue, State } from '@issues/interfaces';
 // import { getIssueByNumber, getIssueComments } from '@issues/services';
 
@@ -13,7 +14,7 @@ export const IssueItem = ({ issue }: IssueItemProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { number, state, title, user, comments, labels } = issue;
+  const { number, state, title, user, comments, labels, created_at } = issue;
 
   // const prefetchData = () => {
   //   queryClient.prefetchQuery({
@@ -56,7 +57,7 @@ export const IssueItem = ({ issue }: IssueItemProps) => {
         <div className="d-flex flex-column flex-fill px-2">
           <span>{title}</span>
           <span className="issue-subinfo">
-            #{number} opened 2 days ago by{' '}
+            #{number} opened {getTimeSince(created_at.toString())} ago by{' '}
             <span className="fw-bold">{user.login}</span>
           </span>
 
