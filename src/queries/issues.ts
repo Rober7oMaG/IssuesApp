@@ -1,12 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { State } from '@interfaces';
-import { getIssueByNumber, getIssueComments, getIssues } from '@services';
+import {
+  getInfiniteIssues,
+  getIssueByNumber,
+  getIssueComments,
+  getIssues,
+} from '@services';
 
 type useIssuesQueryProps = {
   state?: State;
   labels?: string[];
   page: number;
+};
+
+type useInfiniteIssuesQueryProps = {
+  state?: State;
+  labels?: string[];
 };
 
 export const useIssuesQuery = ({
@@ -19,6 +29,19 @@ export const useIssuesQuery = ({
     queryFn: () => getIssues({ state, labels, page }),
     staleTime: 1000 * 60 * 15, // 15 minutes
     refetchOnWindowFocus: false,
+  });
+};
+
+export const useInfiniteIssuesQuery = ({
+  state,
+  labels = [],
+}: useInfiniteIssuesQueryProps) => {
+  return useInfiniteQuery({
+    queryKey: ['issues', 'infinite', { state, labels }],
+    queryFn: (data) => getInfiniteIssues(data),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) =>
+      lastPage.length > 0 ? pages.length + 1 : undefined,
   });
 };
 

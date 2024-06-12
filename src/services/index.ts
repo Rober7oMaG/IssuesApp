@@ -1,2 +1,7 @@
 export { getLabels } from './labels';
-export { getIssues, getIssueByNumber, getIssueComments } from './issues';
+export {
+  getIssues,
+  getInfiniteIssues,
+  getIssueByNumber,
+  getIssueComments,
+} from './issues';

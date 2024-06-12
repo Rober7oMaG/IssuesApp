@@ -16,7 +16,10 @@ export const IssueView = () => {
 
   if (isQueryLoading) return <LoadingIcon />;
 
-  if (!query) return navigate('/issues/list');
+  if (!query) {
+    navigate('/issues/list');
+    return null;
+  }
 
   return (
     <div className="row mb-5">

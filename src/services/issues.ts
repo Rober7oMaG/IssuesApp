@@ -8,6 +8,13 @@ type GetIssuesRequest = {
   page: number;
 };
 
+type GetInfiniteIssuesRequest = Omit<GetIssuesRequest, 'page'>;
+
+type InfiniteQueryProps = {
+  pageParam: number;
+  queryKey: (string | GetInfiniteIssuesRequest)[];
+};
+
 export const getIssues = async ({ state, labels, page }: GetIssuesRequest) => {
   await delay(2);
 
@@ -17,6 +24,25 @@ export const getIssues = async ({ state, labels, page }: GetIssuesRequest) => {
   if (labels.length) params.append('labels', labels.join(','));
 
   params.append('page', page.toString());
+  params.append('per_page', '5');
+
+  const { data } = await githubApi.get<Issue[]>('/issues', { params });
+  return data;
+};
+
+export const getInfiniteIssues = async ({
+  pageParam,
+  queryKey,
+}: InfiniteQueryProps) => {
+  const [, , args] = queryKey;
+  const { state, labels } = args as GetIssuesRequest;
+
+  const params = new URLSearchParams();
+
+  if (state) params.append('state', state);
+  if (labels.length) params.append('labels', labels.join(','));
+
+  params.append('page', pageParam.toString());
   params.append('per_page', '5');
 
   const { data } = await githubApi.get<Issue[]>('/issues', { params });

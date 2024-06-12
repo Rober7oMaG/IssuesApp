@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import { ListView, IssueView } from '@views';
+import { ListView, IssueView, ListViewInfinite } from '@views';
 
 import { App } from '../App';
 
@@ -10,6 +10,7 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: 'list', element: <ListView /> },
+      { path: 'list/infinite', element: <ListViewInfinite /> },
       { path: 'issue/:id', element: <IssueView /> },
       { path: '*', element: <Navigate to="list" /> },
     ],
