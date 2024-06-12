@@ -2,7 +2,13 @@ import { githubApi } from '@api';
 import { delay } from '@helpers';
 import { State, Issue } from '@interfaces';
 
-export const getIssues = async (labels: string[] = [], state?: State) => {
+type GetIssuesRequest = {
+  state?: State;
+  labels: string[];
+  page: number;
+};
+
+export const getIssues = async ({ state, labels, page }: GetIssuesRequest) => {
   await delay(2);
 
   const params = new URLSearchParams();
@@ -10,7 +16,7 @@ export const getIssues = async (labels: string[] = [], state?: State) => {
   if (state) params.append('state', state);
   if (labels.length) params.append('labels', labels.join(','));
 
-  params.append('page', '1');
+  params.append('page', page.toString());
   params.append('per_page', '5');
 
   const { data } = await githubApi.get<Issue[]>('/issues', { params });

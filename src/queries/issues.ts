@@ -6,12 +6,17 @@ import { getIssueByNumber, getIssueComments, getIssues } from '@services';
 type useIssuesQueryProps = {
   state?: State;
   labels?: string[];
+  page: number;
 };
 
-export const useIssuesQuery = ({ state, labels }: useIssuesQueryProps) => {
+export const useIssuesQuery = ({
+  state,
+  labels = [],
+  page,
+}: useIssuesQueryProps) => {
   return useQuery({
-    queryKey: ['issues', { state, labels }],
-    queryFn: () => getIssues(labels, state),
+    queryKey: ['issues', { state, labels, page }],
+    queryFn: () => getIssues({ state, labels, page }),
     staleTime: 1000 * 60 * 15, // 15 minutes
     refetchOnWindowFocus: false,
   });
